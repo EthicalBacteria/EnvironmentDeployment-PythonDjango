@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=django
+      - POSTGRES_USER=django
+      - POSTGRES_PASSWORD=django
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: >
+      sh -c "sleep 10 &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - pgadmin
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
