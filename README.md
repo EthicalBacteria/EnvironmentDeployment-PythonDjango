@@ -5,8 +5,8 @@ Development environment for Django projects
 
 Service | Version | Description
 ------------ | ------------- | -------------
-Python | v.3.8.0 | Language
-Django | v.2.2.6 | Framework
+Python | v.3.8.1 | Language
+Django | v.3.0.3 | Framework
 Psycopg2 | v.2.8.4 | Python-PostgreSQL Database Adapter
 Postgresql | v.12 | Database
 
@@ -16,7 +16,7 @@ Postgresql | v.12 | Database
 
 The Dockerfile defines an application’s image content via one or more build commands that configure that image. Once built, you can run the image in a container. This **Dockerfile** starts with a Python 3 parent image. The parent image is modified by adding a new **code** directory. The parent image is further modified by installing the Python requirements defined in the **requirements.txt** file.
 ```
-FROM python:3.8.0
+FROM python:3.8.1
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
@@ -71,7 +71,7 @@ services:
 
 This file is used by the RUN **pip install -r requirements.txt** command in your **Dockerfile**.
 ```
-Django==2.2.6
+Django==3.0.3
 psycopg2==2.8.4
 ```
 
